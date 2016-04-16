@@ -1,0 +1,119 @@
+// Includes
+
+
+// Pins
+#define BUTTON_1 	10
+#define OPT_1 		0
+#define OPT_2		1
+#define OPT_3		2
+#define OPT_4		3
+#define OPT_5		4
+#define OPT_6		5
+#define OPT_7		6
+#define OPT_8		7
+#define OPT_9		8
+#define OPT_10		9
+
+// Variables
+int OPT[9] = {OPT_1, OPT_2, OPT_3, OPT_4, OPT_5, OPT_6, OPT_7, OPT_8, OPT_9, OPT_10};
+int LEFT[4] = {OPT_1, OPT_2, OPT_3, OPT_4, OPT_5};
+int RIGHT[4] = {OPT_6, OPT_7, OPT_8, OPT_9, OPT_10};
+int current_random = 1;		// Zählt dauerhaft hoch
+
+void setup()[
+	pinMode(BUTTON_1, INPUT);
+	
+	pinMode(OPT_1, OUTPUT);
+	pinMode(OPT_2, OUTPUT);
+	pinMode(OPT_3, OUTPUT);
+	pinMode(OPT_4, OUTPUT);
+	pinMode(OPT_5, OUTPUT);
+	pinMode(OPT_6, OUTPUT);
+	pinMode(OPT_7, OUTPUT);
+	pinMode(OPT_8, OUTPUT);
+	pinMode(OPT_9, OUTPUT);
+	pinMode(OPT_10, OUTPUT);
+	
+	start_up();
+	all(LOW);
+	
+	// TODO: Anzahl der Auswahlmöglichkeiten selbst zu beginn bestimmen (2. Button zwingend erforderlich?)
+}
+
+void loop(){
+	
+	while(digitalRead(BUTTON_1) == HIGH){
+		all(LOW);
+		if(current_random == 1) select(1);
+		else if(current_random == 2) select(2);
+		else if(current_random == 3) select(3);
+		else if(current_random == 4) select(4);
+		else if(current_random == 5) select(5);
+		else if(current_random == 6) select(6);
+		else if(current_random == 7) select(7);
+		else if(current_random == 8) select(8);
+		else if(current_random == 9) select(9);
+		else if(current_random == 10) select(10);
+	}
+	
+	delay(20);
+	current_random++;
+	if (current_random == 11) current_random = 1;
+}
+
+void select(int value){
+	// durchlauf bis zur auswahl
+	for (int x = 0, x < 4, x++){
+		for (int i = 0, i <= 5, i++){
+			digitalWrite(LEFT[i], HIGH);
+			digitalWrite(RIGHT[i], HIGH);
+			digitalWrite(LEFT[i-1], LOW);
+			digitalWrite(RIGHT[i-1], LOW);
+			delay(20);
+		}
+	}
+	
+	int temp = value;
+	
+	if (temp > 5) temp = temp-5;
+	
+	for (int y = 0, y <= value, y++){
+		digitalWrite(LEFT[y], HIGH);
+		digitalWrite(RIGHT[y], HIGH);
+		digitalWrite(LEFT[y-1], LOW);
+		digitalWrite(RIGHT[y-1], LOW);
+		delay(20);
+	}
+	
+	all(LOW);
+	digitalWrite(OPT[value], HIGH);
+}
+
+void all(int value){
+	digitalWrite(OPT_1, value);
+	digitalWrite(OPT_2, value);
+	digitalWrite(OPT_3, value);
+	digitalWrite(OPT_4, value);
+	digitalWrite(OPT_5, value);
+	digitalWrite(OPT_6, value);
+	digitalWrite(OPT_7, value);
+	digitalWrite(OPT_8, value);
+	digitalWrite(OPT_9, value);
+	digitalWrite(OPT_10, value);
+}
+
+void start_up(){
+	all(LOW);
+	delay(30);
+	
+	for (int i=0, i < 5, i++){
+		digitalWrite(LEFT[i], HIGH);
+		digitalWrite(RIGHT[i], HIGH);
+		delay(50)
+	}
+	delay(100);
+	all(LOW);
+	delay(20);
+	all(HIGH);
+	delay(20);
+}
