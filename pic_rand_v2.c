@@ -51,7 +51,7 @@ int RIGHT[] = {OPT_6, OPT_7, OPT_8, OPT_9, OPT_10};
 int current_random = 1;		// Zählt dauerhaft hoch
 int options = 10;		// Wieviele Möglichkeiten
 
-void setup()[
+void setup(){
 
 	TRISA = 0;
 	TRISB = 0x03;
