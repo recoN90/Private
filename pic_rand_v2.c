@@ -42,14 +42,14 @@
 #define OPT_10		LATBbits.LATB7
 
 #define HIGH		1
-#define LOW			0
+#define LOW		0
 
 // Variables
 int OPT[] = {OPT_1, OPT_2, OPT_3, OPT_4, OPT_5, OPT_6, OPT_7, OPT_8, OPT_9, OPT_10};
 int LEFT[] = {OPT_1, OPT_2, OPT_3, OPT_4, OPT_5};
 int RIGHT[] = {OPT_6, OPT_7, OPT_8, OPT_9, OPT_10};
 int current_random = 1;		// Zählt dauerhaft hoch
-int options = 10;
+int options = 10;		// Wieviele Möglichkeiten
 
 void setup()[
 
