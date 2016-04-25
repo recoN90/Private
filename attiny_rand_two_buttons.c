@@ -26,7 +26,6 @@ int label = 0;
 int ButtonVal;
 int options = 10;
 bool up = false;
-bool down = false;
 int Button[2][3] = {{1, 900},   // button 1
                     {2, 800}};  // button 2
 
