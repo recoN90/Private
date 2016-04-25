@@ -48,7 +48,7 @@ void setup(){
 
 void loop(){
   
-  ButtonVal = analogRead(analogpin);
+  ButtonVal = analogRead(BUTTON);
   ButtonCheck();
   
   if (label == 1){
@@ -78,7 +78,7 @@ void loop(){
 void ButtonCheck(){
 	for(int i = 0; i <= 2; i++){
 		temp = ButtonVal/100 * 100;
-		if(temp == Button[i][j]){
+		if(temp == Button[i][1]){
 			label = Button[i][0]; 
 		}
 	}
