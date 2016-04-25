@@ -25,8 +25,10 @@ int current_random = 0;
 int label = 0;
 int ButtonVal;
 int options = 10;
-int Button[2][3] = {{1, 900}, 	// button 1
-                    {2, 800}}; 	// button 2
+bool up = false;
+bool down = false;
+int Button[2][3] = {{1, 900},   // button 1
+                    {2, 800}};  // button 2
 
 void setup(){
   pinMode(BUTTON, INPUT);
@@ -51,15 +53,19 @@ void loop(){
   ButtonVal = analogRead(BUTTON);
   ButtonCheck();
   
-  if (label == 1){
-	options++;
-		if(options == 11){
-			all(LOW);
-			options = 1;
-		}
-		digitalWrite(OPT[options], HIGH);
-  }else if (label == 2){
-	all(LOW);
+  if (label == 1 && up == false){
+    all(LOW);
+    options++;
+    if(options == 11){
+      options = 1;
+      up = true;
+    }
+    for (int i = 0; i <= options; i++){
+      digitalWrite(OPT[i], HIGH);
+    }
+    down = false;
+  }else if (label == 2 && up == false){
+    all(LOW);
     current_random = random(1, options+1);
     if(current_random == 1) select(1);
     else if(current_random == 2) select(2);
@@ -71,17 +77,21 @@ void loop(){
     else if(current_random == 8) select(8);
     else if(current_random == 9) select(9);
     else if(current_random == 10) select(10);
+    up = true;
   }
   delay(20);
 }
 
 void ButtonCheck(){
-	for(int i = 0; i <= 2; i++){
-		temp = ButtonVal/100 * 100;
-		if(temp == Button[i][1]){
-			label = Button[i][0]; 
-		}
-	}
+  for(int i = 0; i <= 2; i++){
+    int temp2 = ButtonVal/100 * 100;
+    if(temp2 == Button[i][1]){
+      label = Button[i][0];
+    }else {
+      label = 0;
+      up = false;
+    }
+  }
 }
 
 void select(int value){
